@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#f8e9f7">
+<title>Happy Birthday, Kaluna! 🎂</title>
+<style>
+  :root {
+    --pink:#ffd9e8;
+    --pd:#f5a9ca;
+    --blue:#d8edff;
+    --bd:#8ec8f5;
+    --ink:#51445d;
+    --muted:#81738b;
+    --paper:rgba(255,255,255,.84);
+    --line:rgba(137,111,155,.17)
+  }
+  * {
+    box-sizing:border-box
+  }
+  body {
+    margin:0;
+    min-height:100vh;
+    font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(145deg,#fff0f6,#eaf5ff 52%,#f7eaff);
+    background-attachment:fixed;
+    overflow-x:hidden
+  }
+  button {
+    font:inherit
+  }
+  .floaties {
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+  }
+  .floaty {
+    position:absolute;
+    bottom:-45px;
+    opacity:0.4;
+    animation:floatUp linear infinite;
+    user-select:none;
+    pointer-events:none;
+    backface-visibility:hidden;
+  }
+  @keyframes floatUp {
+    from {
+      transform:translate3d(0,0,0) rotate(0deg);
+    }
+    to {
+      transform:translate3d(0,-115vh,0) 
+      rotate(20deg);
+    }
+  }
+  .page {
+    position:relative;
+    z-index:1;
+    width:min(100% - 28px,700px);
+    margin:auto;
+    padding:30px 0 24px
+  }
+  .topline {
+    text-align:center;
+    color:#9a82a7;
+    font-size:.77rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    margin:3px 0 16px
+  }
+  .progress {
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin:0 0 18px
+  }
+  .progress span {
+    width:8px;
+    height:8px;
+    border-radius:50px;
+    background:#d8c9e4;
+    transition:.25s
+  }
+  .progress span.active {
+    width:25px;
+    background:linear-gradient(90deg,var(--pd),var(--bd))
+  }
+  .screen {
+    display:none;
+    animation:popIn .7s ease both
+  }
+  .screen.active {
+    display:block
+  }
+  @keyframes popIn {
+    from {
+      opacity:0;
+      transform:translateY(9px) scale(.99)
+    }
+    to {
+      opacity:1;
+      transform:translateY(0) scale(1)
+    }
+  }
+  .card {
+    background:var(--paper);
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:0 18px 50px rgba(112,91,136,.12);
+    border-radius:28px;
+    padding:clamp(23px,6vw,42px);
+    backdrop-filter:blur(10px)
+  }
+  .eyebrow {
+    color:#a17bb0;
+    font-size:.8rem;
+    letter-spacing:.06em;
+    margin-bottom:12px
+  }
+  h1,h2,p {
+    margin-top:0
+  }
+  h1 {
+    font-size:clamp(2.1rem,9vw,3.7rem);
+    line-height:1.02;
+    letter-spacing:-.05em;
+    margin-bottom:15px
+  }
+  h2 {
+    font-size:clamp(1.5rem,6vw,2.15rem);
+    line-height:1.15;
+    letter-spacing:-.035em;
+    margin-bottom:12px
+  }
+  .gradient-text {
+    background:linear-gradient(100deg,#e58ab6,#7bb7e7,#b38bd3);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent
+  }
+  .lead {
+    color:#756781;
+    line-height:1.75;
+    font-size:1rem
+  }
+  .small {
+    color:var(--muted);
+    font-size:.82rem;
+    line-height:1.65
+  }
+  .hero-art {
+    font-size:clamp(3rem,14vw,5.2rem);
+    margin:12px 0 20px;
+    animation:bob 5s ease-in-out infinite; 
+    transform:translateZ(0);
+    backface-visibility: hidden;
+  }
+  @keyframes bob {
+    0%,100% {
+      transform:translate3d(0,0,0);
+    }
+    50% {transform:translate3d(0,-4px,0);
+    }
+  }
+  .button-row {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px
+  }
+  .btn {
+    border:0;
+    border-radius:999px;
+    padding:13px 19px;
+    cursor:pointer;
+    color:#55445e;
+    font-weight:750;
+    transition:transform .18s,box-shadow .18s;
+    background:linear-gradient(110deg,#ffd7e7,#d9edff);
+    box-shadow:0 6px 16px rgba(163,130,176,.17)
+  }
+  .btn:hover {
+    transform:translateY(-2px);
+    box-shadow:0 9px 20px rgba(163,130,176,.23)
+  }
+  .btn:active {
+    transform:scale(.98)
+  }
+  .btn.secondary {
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:none;
+    color:#85758e
+  }
+  .center.center{
+    text-align:center
+  }
+  .button-row {
+    justify-content:center
+  }
+  .question-mark {
+    font-size:3rem;
+    margin-bottom:8px
+  }
+  .reaction {
+    min-height:27px;
+    color:#9a6fa9;
+    margin-top:16px;
+    font-weight:700
+  }
+  .memory-grid {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:20px
+  }
+  .memory {
+    border-radius:18px;
+    padding:16px 17px;
+    background:rgba(255,255,255,.78);
+    border:1px solid var(--line);
+    display:flex;
+    gap:13px;
+    align-items:flex-start
+  }
+  .memory-icon {
+    flex:0 0 39px;
+    height:39px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:linear-gradient(140deg,#ffe0ed,#e1f1ff);
+    font-size:1.25rem
+  }
+  .memory h3 {
+    font-size:.98rem;
+    margin:1px 0 5px
+  }
+  .memory p {
+    margin:0;
+    color:#796b84;
+    line-height:1.65;
+    font-size:.91rem
+  }
+  .quote {
+    margin:20px 0 0;
+    padding:16px 18px;
+    border-left:3px solid #e7b2d1;
+    background:rgba(255,238,247,.62);
+    border-radius:0 16px 16px 0;
+    color:#7b6487;
+    line-height:1.7
+  }
+  .polaroid {
+    width:min(100%,310px);
+    margin:20px auto 22px;
+    padding:12px 12px 17px;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 10px 28px rgba(93,75,116,.13);
+    transform:rotate(-2deg)
+  }
+  .polaroid-art {
+    width:100%;
+    aspect-ratio:4/3;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    border-radius:5px;
+    background:#ffe2ef
+  }
+  .polaroid-art img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+  }
+  .polaroid-caption {
+    text-align:center;
+    margin:13px 0 0;
+    font-size:.85rem;
+    color:#8a7694;
+  }
+  .gift-button {
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    display:block;
+    margin:14px auto 8px;
+    font-size:6.3rem;
+    filter:drop-shadow(0 9px 8px rgba(118,91,143,.15));
+    transition:transform .2s
+  }
+  .gift-button:hover {
+    transform:rotate(-5deg) scale(1.06)
+  }
+  .letter {
+    display:none;
+    margin-top:22px;
+    padding:clamp(18px,5vw,28px);
+    background:#fffafc;
+    border:1px dashed #e7b3d0;
+    border-radius:20px;
+    line-height:1.85;
+    color:#6e5a78;
+    text-align:left
+  }
+  .letter.open {
+    display:block;
+    animation:popIn .5s ease both
+  }
+  .letter p {
+    margin-bottom:15px
+  }
+  .letter p:last-child {
+    margin-bottom:0
+  }
+  .signature {
+    margin-top:20px;
+    color:#b17ca2;
+    font-style:italic
+  }
+  .music-player {
+    text-align:center;
+    margin:24px auto;
+    padding:12px;
+  }
+  #musicToggle {
+    border:1px solid #edb8cd;
+    border-radius:24px;
+    padding:11px 20px;
+    background: #fff0f6;
+    color:#8d5870;
+    font:inherit;
+    cursor:pointer;
+  }
+  #musicStatus {
+    font-size:12px;
+    color:#a77b90;
+    margin-top:8px;
+  }
+  .footer {
+    text-align:center;
+    color:#a18eac;
+    font-size:.76rem;
+    padding:22px 0 0
+  }
+  .back-next {
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px
+  }
+  .back-next.btn {
+    flex:1
+  }
+  .tiny-label {
+    font-size:.73rem;
+    color:#a38cac;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    margin:22px 0 8px
+  }
+  .final-note {
+    padding:14px 17px;
+    border-radius:17px;
+    background:linear-gradient(110deg,rgba(255,220,235,.62),rgba(218,239,255,.7));
+    line-height:1.7;
+    color:#786584
+  }
+  @media(min-width:560px) {
+    .memory-grid {
+      grid-template-columns:1fr 1fr
+    }
+  }
+  @media(prefers-reduced-motion:reduce)
+  {
+    /* Keep the hero and floating background animations smooth. */
+    .screen, .letter {
+      animation:none!important;
+    }
+    button {
+      transition:none!important;
+    }
+    html {
+      scroll-behavior:auto!important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="floaties" id="floaties" aria-hidden="true"></div><main class="page"><div class="topline">✿ a tiny birthday corner, made just for you ✿</div><div class="progress"><span class="active"></span><span></span><span></span><span></span></div>
+    <section class="screen active" id="screen-0"><div class="card center"><div class="eyebrow">✦ an extremely important announcement ✦</div><div class="hero-art">🎂🩵🎀</div>
+      <h1><span class="gradient-text">HAPPY BIRTHDAY,<br>KALUNA!</span></h1>
+      <p class="lead">Breaking news: one very specific human is getting older today. Please remain calm. Or don't. It's your birthday, I guess. </p>
+      <p class="small">I made you a tiny website because apparently saying “happy birthday” normally was too mainstream for me.</p>
+         <div class="button-row"><button class="btn" onclick="goTo(1)">okay, show me →</button></div>
+         <p class="small" style="margin:18px 0 0">warning: contains unserious behavior, introvert allegations, and one sincere message ♡</p></div>
+    </section>
+    <section class="screen" id="screen-1"><div class="card center"><div class="eyebrow">✦ mission 01: birthday check-in ✦</div>
+      <div class="question-mark">🤩</div>
+         <h2>Kaluna, are you ready to be celebrated today?</h2>
+         <p class="lead">This is a very serious survey conducted by a highly questionable institution (me).</p>
+      <div class="button-row"><button class="btn" onclick="answer('ANJAYY gitu kek, dah lanjut tuh pencet (Continue) dah :V')">YES, obviously</button>
+        <button class="btn secondary" onclick="answer('pencet (YES) aja kata gua mah :D')">lemme think...</button></div>
+      <div class="reaction" id="reaction" aria-live="polite"></div>
+      <div class="back-next">
+        <button class="btn secondary" onclick="goTo(0)">← back</button>
+        <button class="btn" onclick="goTo(2)">continue →</button></div>
+      </div>
+    </section>
+    <section class="screen" id="screen-2">
+      <div class="card"><div class="eyebrow">✦ mission 02: kaluna lore ✦</div>
+        <h2>A few very Kaluna-coded things 👀</h2>
+        <p class="lead">Some things about you are just so you that I can't not mention them.</p>
+      <div class="polaroid">
+        <div class="polaroid-art">
+          <img 
+            src="./kaluna.jpg" 
+            alt="kaluna">
+        </div>
+        <p class="polaroid-caption">pretty kaluna.jpg ♡</p></div>
+      <div class="memory-grid">
+        <article class="memory">
+          <div class="memory-icon">🔮</div>
+          <div><h3>1. You and your what-ifs.</h3>
+            <p>you sometimes worry about things that haven't even happened yet.
+              and then i have to remind you, "cukup pikirin hari ini dulu, urusan besok, ya kita pikirin besok." 
+              as always wkwkwkwk.</p>
+          </div>
+        </article>
+        <article class="memory"><div class="memory-icon">🗣️</div>
+          <div><h3>2. Your random little stories.</h3>
+            <p>you sometimes tell me the most random things that happen in your life.
+              and honestly, i like listening to them. 
+              your stories give us more things to talk about, 
+              and i kinda like how they make our conversations last a little longer :D</p>
+          </div>
+        </article>
+        <article class="memory">
+          <div class="memory-icon">🧍</div>
+          <div><h3>3. You and your default-human lifestyle.</h3>
+            <p>jujur menurut gua, lu dan gua nih sama-sama kaya karakter default yang hidupnya gitu-gitu aje in this whole social era wkwkwk.
+              gua gak tau kenapa gua masukin ini ke "kaluna-coded" but i just thought it was funny. 
+              like, we both get to that point where we're like, 
+              "lah bjir ternyata ada yang lebih parah dari gua yak."</p>
+          </div>
+        </article>
+        <article class="memory">
+          <div class="memory-icon">🧭</div>
+          <div><h3>4. Figuring things out together.</h3>
+            <p>sometimes we're both confused about what to do when life gets messy. 
+              but i guess it's nice that we can talk about it and try to figure things out together. 
+              we don't always have the answers, but at least we can share our thoughts and 
+              help each other see things a little differently (anjay)</p>
+          </div>
+        </article>
+      </div>
+      <div class="quote">final verdict: we're both just two original characters with the same boring ahh lifestyle, but at least we have each other to share our little stories with. 
+        and honestly, i'm really glad we still get to be a part of each other's lives.</div>
+      <div class="back-next">
+        <button class="btn secondary" onclick="goTo(1)">← back</button>
+        <button class="btn" onclick="goTo(3)">one more thing →</button></div>
+      </div>
+    </section>
+<section class="screen" id="screen-3">
+  <div class="card">
+  <div class="eyebrow">✦ mission 03: the actually sincere part ✦</div>
+    <h2>Things I hope you know about yourself, Kaluna.</h2>
+    <p class="lead">Kayaknya gua gak pernah ngomongin hal-hal ini ke lu.
+      but since it's your birthday, gua mau jujur aja gimana pandangan gua 
+      ke lu selama ini dari apa yang gua tau.</p>
+  <div class="memory-grid">
+    <article class="memory"><div class="memory-icon">👂</div>
+      <div><h3>you really, really listen</h3>
+        <p>you have this way of making people feel heard and validated. 
+          kaya kemarin gua ada masalah dan gua cuma niat cerita secara garis besarnya aja lah, 
+          tapi ya ujung-ujungnya gua ceritain semua jadinya wkwkwk. 
+          gak tau kenapa but talking to you makes me feel like i'm really being listened to, 
+          and i feel safe opening up to you. 
+          you're kind and attentive in a way that matters.</p>
+      </div>
+    </article>
+    <article class="memory"><div class="memory-icon">📨</div>
+      <div><h3>you keep reaching out</h3>
+        <p>jujur gua masih segen banget sampe sekarang perihal ini, 
+          but i'm genuinely amazed by how you still try to reach out to me, 
+          ngajak ngobrol lagi, dan tetep berusaha rechat gua.
+          gua sendiri gak bisa seberani itu buat ngelakuin hal yang sama 
+          (especially with our past and everything yang you know lah wkwkkwk). 
+          tapi belakangan ini gua ngerasa kaya seneng aja sih, 
+          kalo lu gak nyoba untuk reach out gua terus-menerus keknya kita gak akan ngobrol sepanjang ini lagi. 
+          and honestly, i'm glad you did.</p></div>
+    </article>
+    <article class="memory"><div class="memory-icon">💖</div>
+      <div><h3>a beautiful heart, inside and out</h3>
+        <p>you're forgiving, genuinely kind, and you have such a big heart. 
+          i know people make mistakes, and things aren't always as simple as they seem. 
+          but i really admire how you can still find it in your heart to understand people, 
+          even when things get complicated. 
+          i think there's something really beautiful about the way you see people beyond their mistakes, 
+          and that's one of the things i appreciate about you.</p></div>
+    </article>
+    <article class="memory"><div class="memory-icon">👥</div>
+      <div><h3>you make people feel included</h3>
+        <p>lu tuh kalo udah sayang sama seseorang, kaya pengen ngelibatin orang itu ke banyak hal di kehidupan lu. 
+          entah itu cerita-cerita random lu, hal kecil yang terjadi hari ini, atau hal-hal yang menurut lu penting. 
+          and honestly, gua pernah ngerasain itu dari lu, and it made me feel like i mattered to you. 
+          kaya seneng aja gitu rasanya pas tau kalo gua juga jadi bagian dari hal-hal yang lu ceritain dan lu bagi. 
+          i think it's a really nice thing about you, lun. maybe it seems like a small thing to you, 
+          but it actually means a lot to the people who get to experience it.</p></div>
+    </article>
+    <article class="memory"><div class="memory-icon">🤓</div>
+      <div><h3>your random jokes that i never get</h3>
+        <p>kadang lu suka tiba-tiba asbun gitu, and the funny part is gua selalu ngiranya lu lagi ngetik serius aowkwowk. 
+          soalnya gua gak terbiasa ngeliat lu yang begitu, jadi pas lu nyeletuk sesuatu, gua malah mikir lu beneran ngomong serius jir 
+          padahal maksud lu mah lagi becanda doang yak. 
+          tapi jujur, gua suka sih moment-moment kaya gitu, pas lu tiba-tiba ikutan asbun kaya gua, even when i don't get the joke at all :V 
+          lucu aja ngeliat sisi lu yang ini.</p></div>
+    </article>
+    <article class="memory"><div class="memory-icon">🌱</div>
+      <div><h3>you keep trying to grow</h3>
+        <p>when i share thoughts about how we communicate or how emotions get handled, 
+          you try to listen instead of getting defensive. 
+          you stay open to learning and doing better. 
+          that kind of effort takes heart, 
+          and i hope you give yourself credit for it.</p></div>
+    </article>
+  </div>
+  <div class="quote"><h4>about that one thing you always say:</h4>soal lu yang sering bilang kalo gua tuh sosok yang bisa mengarahkan lu dengan baik (pria matang 😂), 
+    jujur gua sendiri masih suka bingung harus nanggepin itu gimana wkwkwk. 
+    like, gua gak ngerasa kalo gua udah se-matang atau sebaik itu buat jadi sosok yang lu liat. 
+    but i won't lie, hearing that from you actually means a lot to me. 
+    apalagi kalo ternyata hal-hal yang gua lakuin atau omongin selama ini bisa bikin lu ngerasa terbantu.
+    and knowing that you see me that way is kinda reassuring too, in a way. WKWKWK. 
+    dan gak munafik sih, dipuji kaya gitu bikin ego gua naik dikit. dikit doang kok. (bohong.) 🤓</div>
+  <div class="tiny-label">one last thing before your gift</div>
+    <div class="final-note">i know we don't always have everything figured out, 
+      and honestly, sometimes i feel like we're just two introverts trying to make sense of life WKWKWK. 
+      but i'm glad we get to share our thoughts with each other, talk about the things we're going through, 
+      and figure things out along the way. i hope you know that i'm always rooting for you, lun. 
+      not just when something big happens in your life, but also on those random, ordinary days when nothing much happens at all. 
+      i hope life treats you kindly, and even when it doesn't, i hope you know you don't always have to figure everything out on your own. 🤍</div>
+    <div class="back-next"><button class="btn secondary" onclick="goTo(2)">← back</button><button class="btn" onclick="openGift()">open your gift 🎁</button></div>
+  <div id="gift-area" style="display:none"><div class="center" style="margin-top:25px"><div class="eyebrow">✦ a small thing, with a lot of thought ✦</div>
+    <button class="gift-button" onclick="revealLetter()" aria-label="Open birthday letter">🎁</button>
+    <p class="small">alright, birthday girl. tap the gift. it's yours. 🎁</p></div><div class="letter" id="letter" aria-live="polite">
+      <p><strong>Happy birthday, Kaluna 🎂</strong></p>
+        <p>i hope this new chapter of your life brings you a lot of good things, lun. 
+          semoga tahun ini ada lebih banyak hal yang bikin lu seneng, lebih banyak alasan buat ketawa, 
+          and more moments that make you realize how far you've come. i hope life surprises you in the nicest ways possible, 
+          because you deserve good things too.</p>
+        <p>and please, jangan terlalu keras sama diri lu sendiri, ya? 
+          i know sometimes your mind can go way too far into the future, 
+          mikirin ini itu yang bahkan belum tentu kejadian. 
+          but you don't have to figure everything out right now, lun. 
+          one thing at a time, ya? lu gak harus punya semua jawabannya hari ini. 
+          nanti kalo ada yang bikin lu takut lagi, yaudah dijalanin pelan-pelan. 
+          and if you ever feel lost, i hope you remember that you don't always have to figure everything out on your own.</p>
+        <p>also, thank you for being you, lun. thank you for the way you listen, 
+          for making people feel heard, and for how you still try to reach out even when things aren't always easy. 
+          thank you for all the random stories you tell me, even when i end up listening to the whole lore instead 
+          of the short version WKWKWK. thank you for the jokes that i somehow always take seriously, 
+          and for all those little conversations that end up lasting longer than i expected. 
+          i genuinely enjoy those things, and i'm glad i still get to experience them with you.</p>
+        <p>i'm glad i got to know this version of you, and i'm glad we're still here, 
+          sharing little parts of our lives with each other. 
+          idk, there's just something nice about knowing that even after everything, 
+          we can still talk like this. and i hope we get to keep doing that for a long time.</p>
+        <p>i know we're both still figuring things out, and gua sendiri juga masih banyak gak taunya wkwkwk. 
+          sometimes i might not know what to say, or even know what the right thing to do is. 
+          but i hope we can keep being honest with each other, keep learning, and keep trying to understand one another. 
+          gak harus selalu punya nasihat yang bagus atau jawaban buat semuanya, sometimes just being there and listening is enough, right?</p>
+        <p>so please take care of yourself, lun. makan yang bener, minum air yang cukup, istirahat kalo capek, 
+          and don't forget to enjoy the little things too. hari ini hari lu, so i hope you let yourself feel loved and appreciated. 
+          not just because it's your birthday, but simply because you're you 
+          (etdah kaya bapak lu ya gua aowkwowk).</p>
+        <p><b>happy birthday, pretty girl.</b> i hope this year treats you kindly, 
+          and i hope you find more reasons to be happy with the life you're living. 
+          semoga hal-hal baik pelan-pelan dateng ke lu, and when things get a little difficult, 
+          i hope you remember that those moments won't define your whole life.</p>
+      <p class="signature">— from someone who made you click through an entire website just to say all this :P</p>
+      <div class="button-row"><button class="btn" onclick="goTo(2)">← back</button></div>
+    </div></div></div>
+</section>
+<div class="music-player">
+  <audio id="kalunaMusic" autoplay loop preload="auto">
+    <source src="./The Paper Kites - Bloom.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicToggle" type="button">♫ Play</button>
+  <p id="musicStatus" aria-live="polite">A little song for you ♡</p>
+</div>
+<div class="footer">made with a little chaos, a lot of care, and lots of ♡</div></main>
+<script>
+  const screens=[...document.querySelectorAll('.screen')],dots=[...document.querySelectorAll('.progress span')];function goTo(index){screens.forEach((s,i)=>s.classList.toggle('active',i===index));dots.forEach((d,i)=>d.classList.toggle('active',i===index));window.scrollTo({top:0,behavior:'smooth'})}function answer(message){document.getElementById('reaction').textContent=message}function openGift(){const area=document.getElementById('gift-area');area.style.display='block';area.scrollIntoView({behavior:'smooth',block:'start'});popConfetti()}function revealLetter(){document.getElementById('letter').classList.add('open');popConfetti();setTimeout(()=>document.getElementById('letter').scrollIntoView({behavior:'smooth',block:'start'}),100)}function popConfetti(){const emojis=['🩷','🩵','✨','🎀','♡','🌷'];for(let i=0;i<24;i++){const bit=document.createElement('span');bit.textContent=emojis[Math.floor(Math.random()*emojis.length)];bit.style.cssText=`position:fixed;z-index:10;left:${Math.random()*100}vw;top:-30px;font-size:${14+Math.random()*17}px;pointer-events:none;`;document.body.appendChild(bit);const duration=1800+Math.random()*1800,drift=(Math.random()-.5)*150;const animation=bit.animate([{transform:'translate3d(0,0,0) rotate(0deg)',opacity:1},{transform:`translate3d(${drift}px,110vh,0) rotate(${Math.random()*500}deg)`,opacity:0}],{duration,easing:'ease-in',fill:'forwards'});animation.onfinish=()=>bit.remove()}}const floaties=document.getElementById('floaties'),floatEmojis=['♡','✦','☁️','🩷','🩵','✧'];for(let i=0;i<16;i++){const item=document.createElement('span');item.className='floaty';item.textContent=floatEmojis[i%floatEmojis.length];item.style.left=`${Math.random()*100}%`;item.style.fontSize=`${12+Math.random()*19}px`;item.style.animationDuration=`${35+Math.random()*15}s`;item.style.animationDelay=`${Math.random()*5}s`;floaties.appendChild(item)}
+  const music = document.getElementById("kalunaMusic");
+  const toggle = document.getElementById("musicToggle");
+  const status = document.getElementById("musicStatus");
+  function updateMusicButton() {
+    if (music.paused) {
+      toggle.textContent = "♫ Play Bloom";
+    } else {
+      toggle.textContent = "Ⅱ Pause Bloom";
+    }
+  }
+
+  music.volume = 0.45;
+
+  // Coba autoplay saat halaman dibuka.
+  music.play().then(() => {
+    status.textContent = "A little song for you ♡";
+    updateMusicButton();
+  }).catch(() => {
+    status.textContent = "Tap play to start the music ♡";
+    updateMusicButton();
+  });
+
+  // Tombol play/pause sebagai cadangan.
+  toggle.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        status.textContent = "A little song for you ♡";
+      } catch (error) {
+        status.textContent =
+          "Music couldn't play. Check the audio file ♡";
+      }
+    } else {
+      music.pause();
+      status.textContent = "Music paused ♡";
+    }
+
+    updateMusicButton();
+  });
+
+  music.addEventListener("play", updateMusicButton);
+  music.addEventListener("pause", updateMusicButton);
+</script></body></html>
